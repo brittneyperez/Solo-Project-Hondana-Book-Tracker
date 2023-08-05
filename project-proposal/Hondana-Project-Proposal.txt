@@ -1,0 +1,15 @@
+Hondana - Book Tracker
+
+Name: Brittney Perez
+Stack: Java
+GitHub Repo link: 
+Project name: 本棚Hondana
+
+    - [ ] Project description: < Describe what your project is about, why you're building it >
+
+
+MVP (Minimum Viable Product) features: < The features you must have that should be built within the timeframe >
+- 
+
+
+    - [ ] Bonus feature(s): < See platform for ideas for bonus features - you must have at least one; this is meant to get you to look into next technologies and challenge yourself to grow as a developer >
