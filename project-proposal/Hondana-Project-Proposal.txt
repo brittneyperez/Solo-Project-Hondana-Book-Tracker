@@ -9,18 +9,20 @@ GitHub Repo link: https://github.com/brittneyperez/Solo-Project-Hondana-Book-Tr
 Project name: 本棚Hondana
 
 Project description:
-    
-    With 本棚Hondana Book Tracker, users can create, edit, showcase, and delete their own book collections, so they can keep track of their literary journey. Not only will users manage their personal bookshelves, but it also provides valuable insights into their reading habits. Users can view the number of books they've added to their collection, track their favorite reads, and see how many fellow readers they are following and being followed by. This fosters a sense of community and shared interests among users.
-    
-    To ensure the security and privacy of our users, Book Tracker incorporates authentication measures. Only registered users can access the platform's features and interact with the community. This ensures that each user's content is protected and visible only to those within the Book Tracker community.
 
-MVP (Minimum Viable Product) features: < The features you must have that should be built within the timeframe >
+With 本棚Hondana Book Tracker, users can create, edit, showcase, and delete their own book collections, so they can keep track of their literary journey. Not only will users manage their personal bookshelves, but it also provides valuable insights into their reading habits. Users can view the number of books they've added to their collection, track their favorite reads, and see how many fellow readers they are following and being followed by. This fosters a sense of community and shared interests among users.
+
+To ensure the security and privacy of our users, Book Tracker incorporates authentication measures. Only registered users can access the platform's features and interact with the community. This ensures that each user's content is protected and visible only to those within the Book Tracker community.
+
+
+MVP (Minimum Viable Product) features:
 - .gitignore file in root folder
 - All of CRUD on a non-User table
 - CSS implemented, and possibly other static content
 - Data is validated upon create and edit, errors showcase
 - Login and Registration with validations
 - Protected routes (must be logged in to view)
+
 
 Bonus feature(s):
 - Application is responsive
