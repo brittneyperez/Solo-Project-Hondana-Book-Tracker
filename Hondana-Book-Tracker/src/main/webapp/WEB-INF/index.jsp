@@ -14,18 +14,18 @@
 	</head>
 	<body class="bg-primary bg-opacity-10 d-flex flex-column min-vh-100">
 		<header id="Hondana_Header" class="bg-dark d-flex align-items-center justify-content-between py-2 px-3 mb-3">
-    		<a href="#" class="fs-2 fw-bold text-decoration-none text-white" style="font-family: serif;">本棚Hondana</a>
-    		<a href="#" class="btn btn-light btn-sm px-3 fw-medium">Login</a>
+    		<a href="/home" class="fs-2 fw-bold text-decoration-none text-white" style="font-family: serif;">本棚Hondana</a>
+    		<a href="/login" class="btn btn-light btn-sm px-3 fw-medium">Login</a>
 		</header>
 		<!--  -->
 		<div class="container-fluid flex-grow-1">
     		<div id="IndexPage" class="row d-flex justify-content-around">
-        		<div id="SiteDescription_FlexDiv" class="col-md-4 col-lg-6 col-11 px-3 mb-3 mt-md-5">
+        		<div id="SiteDescription_FlexDiv" class="col-11 col-md-4 col-lg-5 px-3 mb-3 mt-md-5">
             		<h2 class="fw-bold text-center text-sm-start">Your Personalized Book Tracking and Reader</h2>
             		<p>Discover, Connect and Engage with 本棚Hondana — Your one-stop app for tracking, sharing, and connecting with like-minded readers!</p>
         		</div>
         		<!--  -->
-        		<div id="UserAuthentication_FlexDiv" class="col-md-6 col-lg-4 col-11 px-3 py-3 mt-md-5 bg-white rounded-2 text-center">
+        		<div id="UserAuthentication_FlexDiv" class="col-11 col-md-6 col-lg-5 px-3 py-3 mt-md-5 bg-white rounded-2 text-center">
             		<h3 class="fw-bold text-secondary">Sign Up Today!</h3>
             		<form:form action="/register-user" method="post" modelAttribute="newUser" id="FormContents">
                 		<!-- Name Input -->
@@ -80,12 +80,12 @@
 	               		</div>
                 		<!-- Submit -->
                 		<div class="d-flex justify-content-end mb-3">
-                			<input type="submit" value="Register" class="btn btn-dark btn-sm" />
+                			<input type="submit" value="Register" class="btn btn-dark btn-sm px-3" />
                 		</div>
             		</form:form>
             		<div id="LoginLink" class="d-flex justify-content-between align-items-center">
 						<hr class="flex-grow-1 mx-3"> <!-- Horizontal line above -->
-						<p class="m-0">Already a Member? <a href="#">Log in</a></p>
+						<p class="m-0">Already a Member? <a href="/login">Log in</a></p>
 						<hr class="flex-grow-1 mx-3"> <!-- Horizontal line below -->
 					</div>
         		</div>

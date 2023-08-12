@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.soloproject.hondana.models.User;
 import com.soloproject.hondana.services.UserService;
+import com.soloproject.hondana.validators.LoginCredential;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -45,21 +46,36 @@ public class UserController {
 	
 	
 	// * LOGIN ----------------------------------
+	@GetMapping("/login")
+	public String loginPage( @ModelAttribute("loginUser") LoginCredential newLoginObject ) {
+		return "login-page.jsp";
+	}
 	
+	@PostMapping("/login-user")
+	public String login(
+			@Valid @ModelAttribute("loginUser") LoginCredential newloginObject,
+			BindingResult result, Model model, HttpSession session
+			) {
+		User thisUser = this.uService.loginUser(newloginObject, result);
+		if (result.hasErrors()) {
+			return "login-page.jsp";
+		}
+		session .setAttribute("userId", thisUser.getId());
+		System.out.printf("\n$ Welcome back, @user%s...\n", thisUser.getId());
+		return "redirect:/home";
+	}
 	
 	// * HOME -----------------------------------
-	
 	@GetMapping("/home")
 	public String homepage( Model model, HttpSession session ) {
-		if (session.getAttribute("userId") == null) {
-			return "redirect:/register";
-		}
+//		if (session.getAttribute("userId") == null) {
+//			return "redirect:/register";
+//		}
 		
-		Long userId = (long) session.getAttribute("userId");
-		User currentUser = this.uService.findUserById(userId);
-		model.addAttribute("currentUser", currentUser);
+//		Long userId = (long) session.getAttribute("userId");
+//		User currentUser = this.uService.findUserById(userId);
+//		model.addAttribute("currentUser", currentUser);
 		// add book model attribute
-		
 		return "home.jsp";
 	}
 	
