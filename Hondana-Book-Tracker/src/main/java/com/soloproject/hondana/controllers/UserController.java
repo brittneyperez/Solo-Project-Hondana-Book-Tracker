@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.soloproject.hondana.models.User;
+import com.soloproject.hondana.services.BookService;
 import com.soloproject.hondana.services.UserService;
 import com.soloproject.hondana.validators.LoginCredential;
 
@@ -20,8 +21,10 @@ public class UserController {
 	
 	@Autowired
 	private UserService uService;
+	@Autowired
+	private BookService bService;
 	
-	// * REGISTER -------------------------------
+//	* REGISTER ----------------------------------
 	@GetMapping("/register")
 	public String index( @ModelAttribute("newUser") User newUser ) {
 		return "index.jsp";
@@ -32,20 +35,18 @@ public class UserController {
 			@Valid @ModelAttribute("newUser") User registeringUser,
 			BindingResult result, Model model, HttpSession session
 			) {
-		// 1 Call uService.registerUser() method to perfrom extra validations when creating a user:
 		User thisUser = this.uService.registerUser(registeringUser, result);
-		// 2 If/when "null" is returned from uService.registerUser(), then return the form with errors:
-		if (result.hasErrors()) {
+		if (result.hasErrors()) { // Validation errors exist, return to the registration page with errors
 			return "index.jsp";
-		}
-		// 3 If BindingResult is valid, then save thisUser to db and store id in session to log them in:
+		} 
+		// If BindingResult is valid, continue with successful registration
 		session.setAttribute("userId", thisUser.getId());
 		System.out.printf("\n$ Welcome user, @user%s...\n", thisUser.getId());
 		return "redirect:/home";
 	}
 	
 	
-	// * LOGIN ----------------------------------
+//	* LOGIN -------------------------------------
 	@GetMapping("/login")
 	public String loginPage( @ModelAttribute("loginUser") LoginCredential newLoginObject ) {
 		return "login-page.jsp";
@@ -65,31 +66,34 @@ public class UserController {
 		return "redirect:/home";
 	}
 	
-	// * HOME -----------------------------------
+//	* HOME --------------------------------------
 	@GetMapping("/home")
 	public String homepage( Model model, HttpSession session ) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/login";
 		}
 		
-//		Long userId = (long) session.getAttribute("userId");
-//		User currentUser = this.uService.findUserById(userId);
-//		model.addAttribute("currentUser", currentUser);
+		Long userId = (long) session.getAttribute("userId");
+		User currentUser = this.uService.findUserById(userId);
+		model.addAttribute("currentUser", currentUser);
+//		! Todo: Implement a list of books not writte by the user to favorite/unfavorite
+//		model.addAttribute("books", this.bService.findAllBooks());
+		model.addAttribute("myBooks", currentUser.getMyBooks());
 		// add book model attribute
 		return "home.jsp";
 	}
 	
-	// * HOME -----------------------------------
+//	* USER DASHBOARDS ---------------------------
 	@GetMapping("/u/profile")
 	public String profilePage( Model model, HttpSession session ) {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/login";
 		}
 		
-//		Long userId = (long) session.getAttribute("userId");
-//		User currentUser = this.uService.findUserById(userId);
-//		model.addAttribute("currentUser", currentUser);
-		// add book model attribute
+		Long userId = (long) session.getAttribute("userId");
+		User currentUser = this.uService.findUserById(userId);
+		model.addAttribute("currentUser", currentUser);
+//		add book model attribute where it shows books favorited by the user, giving the option to unfavorite from their
 		return "profile-page.jsp";
 	}
 	
@@ -99,11 +103,19 @@ public class UserController {
 			return "redirect:/login";
 		}
 		
-//		Long userId = (long) session.getAttribute("userId");
-//		User currentUser = this.uService.findUserById(userId);
-//		model.addAttribute("currentUser", currentUser);
+		Long userId = (long) session.getAttribute("userId");
+		User currentUser = this.uService.findUserById(userId);
+		model.addAttribute("currentUser", currentUser);
 		// add book model attribute
 		return "other-user-page.jsp";
 	}
 	
+	
+//	* LOGOUT ------------------------------------
+	@GetMapping("/logout")
+	public String logout( HttpSession session ) {
+		session.invalidate();
+		System.out.println("\n$ See you soon!\n");
+		return "redirect:/";
+	}
 }

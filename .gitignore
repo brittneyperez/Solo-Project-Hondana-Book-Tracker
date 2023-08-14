@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/macos,java,maven,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,java,maven,eclipse
 
+# Pseudo Accounts
+project-proposal/pseudo-accounts.txt
+
 ### Eclipse ###
 .metadata
 bin/

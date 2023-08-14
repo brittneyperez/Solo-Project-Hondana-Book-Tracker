@@ -15,7 +15,7 @@
 	<body class="bg-primary bg-opacity-10 d-flex flex-column min-vh-100">
 		<header id="Hondana_Header" class="bg-dark d-flex align-items-center justify-content-between py-2 px-3 mb-3">
     		<a href="/home" class="fs-2 fw-bold text-decoration-none text-white" style="font-family: serif;">本棚Hondana</a>
-    		<a href="#" class="btn btn-light btn-sm px-3 fw-medium">Logout</a>
+    		<a href="/logout" class="btn btn-light btn-sm px-3 fw-medium">Logout</a>
 		</header>
 		<!--  -->
 		<div class="container-fluid flex-grow-1">
@@ -23,9 +23,10 @@
         		<!--  -->
         		<div id="User_Home_Dashboard" class="col-11 col-lg-10 px-5 py-3 mt-3 bg-white rounded-2">
             		<div id="UserControls_Header" class="d-flex align-items-center justify-content-between">            		
-	            		<h3 class="fw-semibold">Welcome, User</h3>
+	            		<h3 class="fw-semibold">Profile</h3>
 	            		<div id="User-Navigation-Controls" class="d-flex justify-content-between gap-2">
 	            			<!-- <a href="#" class="mb-0">Search</a> -->
+	            			<a href="/book/add" class="mb-0 text-secondary fw-medium text-decoration-none">+ Book</a>
 	            			<a href="/home" class="mb-0 text-secondary fw-medium text-decoration-none">Home</a>
 	            			<a href="/u/profile" class="mb-0 text-primary-emphasis fw-semibold text-decoration-none">Profile</a>
 	            		</div>
@@ -40,25 +41,19 @@
 										<img src="/images/abstract-user-flat-4.svg" alt="user-icon" style="height: 55px;" class="image-with-border">
 									</span>
 									<div id="Username_ActualName">
-										<h5>@jdoe</h5>
-				            			<h5>Jane Doe</h5>
+										<h5>@<c:out value="${currentUser.username}" /></h5>
+				            			<h5><c:out value="${currentUser.firstName}" /> <c:out value="${currentUser.lastName}" /></h5>
 									</div>
 								</div>
 			           			<div id="User_Stats" class="pt-2 text-secondary d-flex justify-content-center gap-1" style="font-size: 14px;">
 			            			<p>16 Books</p>
 			            			<span>|</span>
 			            			<div id="Follower_Count">	
-				           				<p class="d-flex gap-1">
-				           					<span>0</span>
-				           					Followers
-				           				</p>
+				           				<p class="d-flex gap-1"><span>0</span>Followers</p>
 			            			</div>
 			            			<span>|</span>
-			            			<div id="Following_Count">	
-				           				<p class="d-flex gap-1">
-				           					<span>0</span>	
-				           					Following
-				           				</p>
+			            			<div id="Following_Count">
+			            				<p class="d-flex gap-1"><span>0</span> Following</p>
 			            			</div>
 			            		</div>
 	           				</div>

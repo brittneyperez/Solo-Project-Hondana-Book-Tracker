@@ -2,14 +2,17 @@ package com.soloproject.hondana.models;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -65,12 +68,12 @@ public class User {
 	private String username;
 	
 	@NotEmpty(message = "Password is required")
-	@Size(min = 8, max = 30, message = "Password must be 8–30 characters")
+	@Size(min = 8, message = "Password must be 8–30 characters")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).*$", message = "Password must contain a combination of numbers, letters, or special characters")
 	private String password;
 	@Transient
 	@NotEmpty(message = "Confirm password is required")
-	@Size(min = 8, max = 30, message = "Password must be 8–30 characters")
+	@Size(min = 8, message = "Password must be 8–30 characters")
 	private String confirmPassword;
 	
 	@NotNull(message = "Date of birth is required")
@@ -78,7 +81,11 @@ public class User {
 	
 	
 	// * TABLE RELATIONSHIP ATTRIBUTES ----------
+	@OneToMany(mappedBy = "writer", fetch=FetchType.LAZY)
+	private List<Book> myBooks;
 	
+	@OneToMany(mappedBy = "reader")
+	private List<Book> favoritedBooks;
 	
 	
 	// * CONSTRUCTORS ---------------------------
@@ -154,5 +161,17 @@ public class User {
 	}
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+	public List<Book> getMyBooks() {
+		return myBooks;
+	}
+	public void setMyBooks(List<Book> myBooks) {
+		this.myBooks = myBooks;
+	}
+	public List<Book> getFavoritedBooks() {
+		return favoritedBooks;
+	}
+	public void setFavoritedBooks(List<Book> favoritedBooks) {
+		this.favoritedBooks = favoritedBooks;
 	}
 }

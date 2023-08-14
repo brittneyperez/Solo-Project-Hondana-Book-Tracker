@@ -15,7 +15,7 @@
 	<body class="bg-primary bg-opacity-10 d-flex flex-column min-vh-100">
 		<header id="Hondana_Header" class="bg-dark d-flex align-items-center justify-content-between py-2 px-3 mb-3">
     		<a href="/home" class="fs-2 fw-bold text-decoration-none text-white" style="font-family: serif;">本棚Hondana</a>
-    		<a href="#" class="btn btn-light btn-sm px-3 fw-medium">Logout</a>
+    		<a href="/logout" class="btn btn-light btn-sm px-3 fw-medium">Logout</a>
 		</header>
 		<!--  -->
 		<div class="container-fluid flex-grow-1">
@@ -26,8 +26,9 @@
 	            		<h3 class="fw-semibold">Welcome, User</h3>
 	            		<div id="User-Navigation-Controls" class="d-flex justify-content-between gap-2">
 	            			<!-- <a href="#" class="mb-0">Search</a> -->
+	            			<a href="/book/add" class="mb-0 text-secondary fw-medium text-decoration-none">+ Book</a>
 	            			<a href="/home" class="mb-0 text-secondary fw-medium text-decoration-none">Home</a>
-	            			<a href="/u/profile" class="mb-0 text-primary-emphasis fw-semibold text-decoration-none">Profile</a>
+	            			<a href="/u/profile" class="mb-0 text-secondary fw-medium text-decoration-none">Profile</a>
 	            		</div>
             		</div>
             		<hr />
@@ -48,17 +49,11 @@
 			            			<p>16 Books</p>
 			            			<span>|</span>
 			            			<div id="Follower_Count">	
-				           				<p class="d-flex gap-1">
-				           					<span>0</span>
-				           					Followers
-				           				</p>
+				           				<p class="d-flex gap-1"><span>0</span> Followers</p>
 			            			</div>
 			            			<span>|</span>
-			            			<div id="Following_Count">	
-				           				<p class="d-flex gap-1">
-				           					<span>0</span>	
-				           					Following
-				           				</p>
+			            			<div id="Following_Count">
+			            				<p class="d-flex gap-1"><span>0</span> Following</p>
 			            			</div>
 			            		</div>
 	           				</div>
