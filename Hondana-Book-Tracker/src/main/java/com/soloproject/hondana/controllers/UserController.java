@@ -68,15 +68,42 @@ public class UserController {
 	// * HOME -----------------------------------
 	@GetMapping("/home")
 	public String homepage( Model model, HttpSession session ) {
-//		if (session.getAttribute("userId") == null) {
-//			return "redirect:/register";
-//		}
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}
 		
 //		Long userId = (long) session.getAttribute("userId");
 //		User currentUser = this.uService.findUserById(userId);
 //		model.addAttribute("currentUser", currentUser);
 		// add book model attribute
 		return "home.jsp";
+	}
+	
+	// * HOME -----------------------------------
+	@GetMapping("/u/profile")
+	public String profilePage( Model model, HttpSession session ) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}
+		
+//		Long userId = (long) session.getAttribute("userId");
+//		User currentUser = this.uService.findUserById(userId);
+//		model.addAttribute("currentUser", currentUser);
+		// add book model attribute
+		return "profile-page.jsp";
+	}
+	
+	@GetMapping("/u/show")
+	public String anotherUserPage( Model model, HttpSession session ) {
+		if (session.getAttribute("userId") == null) {
+			return "redirect:/login";
+		}
+		
+//		Long userId = (long) session.getAttribute("userId");
+//		User currentUser = this.uService.findUserById(userId);
+//		model.addAttribute("currentUser", currentUser);
+		// add book model attribute
+		return "other-user-page.jsp";
 	}
 	
 }

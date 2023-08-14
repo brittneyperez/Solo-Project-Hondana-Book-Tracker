@@ -21,29 +21,81 @@
 		<div class="container-fluid flex-grow-1">
     		<div id="HomePage_FlexDiv" class="row d-flex justify-content-center">
         		<!--  -->
-        		<div id="User_Home_Dashboard" class="col-11 col-md-10 col-lg-10 px-5 py-3 mt-3 bg-white rounded-2">
-            		<div id="UserControls_Header" class="">            		
+        		<div id="User_Home_Dashboard" class="col-11 col-lg-10 px-5 py-3 mt-3 bg-white rounded-2">
+            		<div id="UserControls_Header" class="d-flex align-items-center justify-content-between">            		
 	            		<h3 class="fw-semibold">Welcome, User</h3>
+	            		<div id="User-Navigation-Controls" class="d-flex justify-content-between gap-2">
+	            			<!-- <a href="#" class="mb-0">Search</a> -->
+	            			<a href="/home" class="mb-0 text-primary-emphasis fw-semibold text-decoration-none">Home</a>
+	            			<a href="/u/profile" class="mb-0 text-secondary fw-medium text-decoration-none">Profile</a>
+	            		</div>
             		</div>
             		<hr />
             		<!--  -->
             		<div id="FlexDiv_Books_and_Followers" class="d-flex justify-content-between">            		
-	            		<div id="FlexDiv_Left">            		
-		            		<h4>All Books</h4>
-		            		<h4>My Books</h4>
+	            		<div id="FlexDiv_Left" class="col-12 col-lg-7">
+	            			<div id="All_Books_Div">
+			            		<h4 class="border-bottom border-3 pb-2 fw-semibold">All Books</h4>
+	            				<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
+	            					<div id="FlexDivLeft_BookDetails">
+		            					<h5>Where the Red Fern Grows</h5>
+		            					<h6>by Wilson Rawls</h6>
+		            					<p class="text-secondary">added by <a href="/u/show" class="text-decoration-none text-secondary fw-medium">@username123</a></p>
+	            					</div>
+	            					<div id="Button-Config" class="d-grid d-md-flex justify-content-md-end">
+										<button class="btn btn-dark bt-sm fw-medium px-3 w-100 mb-3">Add Favorite</button>
+									</div>
+	            				</div>
+	            				<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
+	            					<div id="FlexDivLeft_BookDetails">
+		            					<h5>Where the Red Fern Grows</h5>
+		            					<h6>by Wilson Rawls</h6>
+		            					<p class="text-secondary">added by <a href="/u/show" class="text-decoration-none text-secondary fw-medium">@username123</a></p>
+	            					</div>
+	            					<div id="Button-Config" class="d-grid d-md-flex justify-content-md-end">
+										<button class="btn btn-outline-dark bt-sm fw-medium px-4 mb-3">Unfavorite</button>
+									</div>
+	            				</div>
+	            			</div>
+		            		<!-- <hr style="width: 500px;" /> -->
+		            		<div id="My_Books_Div">
+			            		<h4 class="border-bottom border-3 pb-2 fw-semibold">My Books</h4>
+		            			<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
+	            					<div id="FlexDivLeft_BookDetails">
+		            					<h5>Where the Red Fern Grows</h5>
+		            					<h6>by Wilson Rawls</h6>
+		            					<p class="text-secondary">added May 7, 2022 11:30AM</p>
+	            					</div>
+	            					<div id="Button-Config" class="d-sm-grid d-flex justify-content-between gap-1">
+										<button class="btn btn-dark bt-sm fw-medium w-100 mb-3">Edit</button>
+										<button class="btn btn-danger bt-sm fw-medium w-100 px-4 mb-3">Delete</button>
+									</div>
+	            				</div>
+	            				<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
+	            					<div id="FlexDivLeft_BookDetails">
+		            					<h5>Where the Red Fern Grows</h5>
+		            					<h6>by Wilson Rawls</h6>
+		            					<p class="text-secondary">added May 7, 2022 11:30AM</p>
+	            					</div>
+	            					<div id="Button-Config" class="d-sm-grid d-flex justify-content-between gap-1">
+										<button class="btn btn-dark bt-sm fw-medium w-100 mb-3">Edit</button>
+										<button class="btn btn-danger bt-sm fw-medium w-100 px-4 mb-3">Delete</button>
+									</div>
+	            				</div>
+		            		</div>
 	            		</div>
 	            		<!--  -->
-	            		<div id="FlexDiv_Right">
-		            		<h4>Followers</h4>
+	            		<div id="FlexDiv_Right" class="d-none d-lg-block col-lg-4">
+		            		<h4 class="border-bottom border-3 pb-2">Followers</h4>
+		            		<p class="mx-auto text-secondary">Feature Coming Soon!</p>
 	            		</div>
             		</div>
             		<!--  -->
-            		<p>Testing...</p>
         		</div>
 		    </div>
 		</div>
-		<!--  -->
-		<footer id="Hondana_Footer" class="bg-dark text-light d-flex justify-content-center p-2">
+		<!-- End ~ FlexDiv_Books_and_Followers -->
+		<footer id="Hondana_Footer" class="bg-dark text-light d-flex justify-content-center mt-4 p-2">
     		<p>Made with ❤︎ in Coding Dojo © 2023 本棚Hondana</p>
 		</footer>
 	</body>
