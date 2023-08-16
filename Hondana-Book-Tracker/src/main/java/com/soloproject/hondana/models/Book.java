@@ -1,9 +1,11 @@
 package com.soloproject.hondana.models;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +13,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -48,10 +52,6 @@ public class Book {
 	@Size(min = 2, message = "Must be at least 2 characters")
 	private String title;
 	
-	@NotEmpty(message = "Author must not be blank.")
-	@Size(min = 2, message = "Author's name must be at least 2 characters.")
-	private String author;
-	
 	@NotEmpty(message = "Your thoughts are required.")
 	@Size(min= 2, max = 500, message = "Your thoughts must be between 2 and 500 characters.")	
 	private String bookDetails;
@@ -62,17 +62,21 @@ public class Book {
 	@JoinColumn(name = "writer_id")
 	private User writer;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "reader_id")
-	private User reader;
+	@ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(
+		name = "favoriteBooks",
+		joinColumns = @JoinColumn(name = "book_id"),
+		inverseJoinColumns = @JoinColumn(name = "user_id")
+	)
+	private List<User> readers;
 	
 	
 	// * CONSTRUCTORS ---------------------------
 	public Book() {}
-	public Book( String title, String author, String bookDetails ) {
+	public Book( String title, String bookDetails, User writer ) {
 		this.title = title;
-		this.author = author;
 		this.bookDetails = bookDetails;
+		this.writer = writer;
 	}
 	
 	
@@ -101,12 +105,6 @@ public class Book {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getAuthor() {
-		return author;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
-	}
 	public String getBookDetails() {
 		return bookDetails;
 	}
@@ -119,10 +117,10 @@ public class Book {
 	public void setWriter(User writer) {
 		this.writer = writer;
 	}
-	public User getReader() {
-		return reader;
+	public List<User> getReaders() {
+		return readers;
 	}
-	public void setReader(User reader) {
-		this.reader = reader;
+	public void setReaders(List<User> readers) {
+		this.readers = readers;
 	}
 }

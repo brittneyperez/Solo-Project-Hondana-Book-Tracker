@@ -23,7 +23,7 @@
         		<!--  -->
         		<div id="User_Home_Dashboard" class="col-11 col-lg-10 px-5 py-3 mt-3 bg-white rounded-2">
             		<div id="UserControls_Header" class="d-flex align-items-center justify-content-between">            		
-	            		<h3 class="fw-semibold">Welcome, User</h3>
+	            		<h3 class="fw-semibold mb-0">User's Profile Page</h3>
 	            		<div id="User-Navigation-Controls" class="d-flex justify-content-between gap-2">
 	            			<!-- <a href="#" class="mb-0">Search</a> -->
 	            			<a href="/book/add" class="mb-0 text-secondary fw-medium text-decoration-none">+ Book</a>

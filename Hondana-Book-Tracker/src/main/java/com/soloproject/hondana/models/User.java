@@ -6,12 +6,16 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
@@ -84,8 +88,14 @@ public class User {
 	@OneToMany(mappedBy = "writer", fetch=FetchType.LAZY)
 	private List<Book> myBooks;
 	
-	@OneToMany(mappedBy = "reader")
-	private List<Book> favoritedBooks;
+//	@OneToMany(mappedBy = "reader")
+	@ManyToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(
+		name = "favoriteBooks",
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "book_id")
+	)	
+	private List<Book> favoriteBooks;
 	
 	
 	// * CONSTRUCTORS ---------------------------
@@ -168,10 +178,10 @@ public class User {
 	public void setMyBooks(List<Book> myBooks) {
 		this.myBooks = myBooks;
 	}
-	public List<Book> getFavoritedBooks() {
-		return favoritedBooks;
+	public List<Book> getFavoriteBooks() {
+		return favoriteBooks;
 	}
-	public void setFavoritedBooks(List<Book> favoritedBooks) {
-		this.favoritedBooks = favoritedBooks;
+	public void setFavoriteBooks(List<Book> favoriteBooks) {
+		this.favoriteBooks = favoriteBooks;
 	}
 }

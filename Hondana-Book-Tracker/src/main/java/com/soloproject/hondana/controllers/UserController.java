@@ -79,6 +79,9 @@ public class UserController {
 //		! Todo: Implement a list of books not writte by the user to favorite/unfavorite
 //		model.addAttribute("books", this.bService.findAllBooks());
 		model.addAttribute("myBooks", currentUser.getMyBooks());
+//		model.addAttribute("allBooks", this.bService.findUnfavoritedBooksForThisUser(currentUser));
+		model.addAttribute("allBooks", this.bService.findAllBooks());
+		
 		// add book model attribute
 		return "home.jsp";
 	}
@@ -89,26 +92,37 @@ public class UserController {
 		if (session.getAttribute("userId") == null) {
 			return "redirect:/login";
 		}
-		
 		Long userId = (long) session.getAttribute("userId");
 		User currentUser = this.uService.findUserById(userId);
-		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("currentUser", currentUser); // displays user data
+		
+		// Book Counter:
+		int publishedBooksCount = currentUser.getMyBooks().size();
+		model.addAttribute("publishedBooksCount", publishedBooksCount);
+		model.addAttribute("favoriteBooksCount", (int) currentUser.getFavoriteBooks().size());
+		
+		// Book Display:
+		model.addAttribute("myBooks", currentUser.getMyBooks()); // displays user's books they wrote
+		model.addAttribute("favoriteBooks", currentUser.getFavoriteBooks());
+		
 //		add book model attribute where it shows books favorited by the user, giving the option to unfavorite from their
 		return "profile-page.jsp";
 	}
 	
-	@GetMapping("/u/show")
-	public String anotherUserPage( Model model, HttpSession session ) {
-		if (session.getAttribute("userId") == null) {
-			return "redirect:/login";
-		}
-		
-		Long userId = (long) session.getAttribute("userId");
-		User currentUser = this.uService.findUserById(userId);
-		model.addAttribute("currentUser", currentUser);
-		// add book model attribute
-		return "other-user-page.jsp";
-	}
+	
+//	* FEATURE COMING SOON!
+//	@GetMapping("/u/show")
+//	public String anotherUserPage( Model model, HttpSession session ) {
+//		if (session.getAttribute("userId") == null) {
+//			return "redirect:/login";
+//		}
+//		
+//		Long userId = (long) session.getAttribute("userId");
+//		User currentUser = this.uService.findUserById(userId);
+//		model.addAttribute("currentUser", currentUser);
+//		// add book model attribute
+//		return "other-user-page.jsp";
+//	}
 	
 	
 //	* LOGOUT ------------------------------------

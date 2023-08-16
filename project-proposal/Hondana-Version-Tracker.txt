@@ -1,0 +1,10 @@
+Version ~0.5 = WED 2023.08.16
+
+- Implemented basic CRUD features.
+- Implemented "Favorite Books" feature where users can see works created by other users and Favorite/Unfavorite them.
+- These favorited books will also appear in the user's profile page.
+- Removed author attribute as the users creating the Story is the author (or now called writers) themselves.
+- Creation forms will now have the author field disabled and auto-populated with the user's username.
+- To users signed in (and in the future, their friend connections) will see their Display Name (First and Last names)
+
+- However the only the username will be exposed to the other users unless they click on the link to profile to see that user's page. (feature still pending)

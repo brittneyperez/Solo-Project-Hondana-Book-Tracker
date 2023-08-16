@@ -10,7 +10,7 @@
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="style.css">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-		<title>Add Book | 本棚Hondana</title>
+		<title>Edit Book | 本棚Hondana</title>
 	</head>
 	<body class="bg-primary bg-opacity-10 d-flex flex-column min-vh-100">
 		<header id="Hondana_Header" class="bg-dark d-flex align-items-center justify-content-between py-2 px-3 mb-3">
@@ -23,7 +23,7 @@
         		<!--  -->
         		<div id="User_Dashboard" class="col-11 col-lg-10 px-5 py-3 mt-3 bg-white rounded-2">
             		<div id="UserControls_Header" class="d-flex align-items-center justify-content-between">            		
-	            		<h3 class="fw-semibold mb-0">Add Book</h3>
+	            		<h3 class="fw-semibold mb-0">Edit Book</h3>
 	            		<div id="User-Navigation-Controls" class="d-flex justify-content-between gap-2">
 	            			<!-- <a href="#" class="mb-0">Search</a> -->
 	            			<a href="/book/add" class="mb-0 text-primary-emphasis fw-semibold text-decoration-none">+ Book</a>
@@ -34,27 +34,14 @@
             		<hr />
             		<!--  -->          		
 	            	<div id="FlexDiv_Left" class="mt-2 col-lg-10 col-12 text-start">
-						<form:form action="/book/create" method="post" modelAttribute="newBook">
+						<form:form action="/book/${bookToEdit.id}/update" method="post" modelAttribute="bookToEdit">
+							<input type="hidden" name="_method" value="put" />
 							<!-- Title Input -->
 							<div class="form-group row mx-5 mb-3">
 								<form:label path="title" class="col-md-3 col-form-label"><strong>Title:</strong></form:label>
 								<div class="col-md-9">
 									<form:input type="text" path="title" class="form-control" style="border-color: gainsboro; border-width: 2px;" />
 									<form:errors path="title" class="d-flex justify-content-center text-danger" />
-								</div>
-							</div>
-							<!-- Author Input -->
-							<div class="form-group row mx-5 mb-3">
-								<form:label path="writer.username" class="col-md-3 col-form-label"><strong>Author:</strong></form:label>
-								<div class="col-md-9">
-									<div class="input-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text">@</span>
-										</div>
-										<form:input type="text" path="writer.username" class="form-control" style="border-color: gainsboro; border-width: 2px;" disabled="true" />
-									</div>
-									<form:hidden path="writer.id" />
-									<form:errors path="writer.username" class="d-flex justify-content-center text-danger" />
 								</div>
 							</div>
 							<!-- Book Details Input -->
@@ -67,11 +54,24 @@
 							</div>
 							<!-- Submit Button -->
 							<div class="d-flex justify-content-end  gap-2 mb-3 me-5">
-								<a href="/home" class="btn btn-secondary bt-sm text-decoration-none">Cancel</a>
-								<input type="submit" value="Publish" class="btn btn-dark fw-medium btn-sm px-3" />
+								<a href="/home" class="btn btn-secondary bt-sm px-4 text-decoration-none">Cancel</a>
+								<input type="submit" value="Save Changes" class="btn btn-dark btn-sm" />
 							</div>
-						</form:form>   	
-            		</div>
+						</form:form>
+						<div id="BookTimestamps">
+								<p class="text-secondary fw-light" style="font-size: 14px;">
+									<span>Published: <fmt:formatDate value="${bookToEdit.createdAt}" pattern="MMM d, yyyy • hh:mma" /></span> <br />
+									<c:choose>
+										<c:when test="${not empty bookToEdit.updatedAt }">
+											<span>Last Edited: <fmt:formatDate value="${bookToEdit.updatedAt}" pattern="MMM d, yyyy • hh:mma" /></span>
+										</c:when>
+										<c:otherwise>
+											<span class="invisible">None</span>
+										</c:otherwise>
+									</c:choose>
+								</p>
+							</div>
+					</div>
             		<!--  -->
         		</div>
 		    </div>

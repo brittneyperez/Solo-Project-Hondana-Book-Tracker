@@ -23,7 +23,7 @@
         		<!--  -->
         		<div id="User_Home_Dashboard" class="col-11 col-lg-10 px-5 py-3 mt-3 bg-white rounded-2">
             		<div id="UserControls_Header" class="d-flex align-items-center justify-content-between">            		
-	            		<h3 class="fw-semibold">Profile</h3>
+	            		<h3 class="fw-semibold mb-0">Profile</h3>
 	            		<div id="User-Navigation-Controls" class="d-flex justify-content-between gap-2">
 	            			<!-- <a href="#" class="mb-0">Search</a> -->
 	            			<a href="/book/add" class="mb-0 text-secondary fw-medium text-decoration-none">+ Book</a>
@@ -46,116 +46,76 @@
 									</div>
 								</div>
 			           			<div id="User_Stats" class="pt-2 text-secondary d-flex justify-content-center gap-1" style="font-size: 14px;">
-			            			<p>16 Books</p>
+			            			<c:choose>
+			            				<c:when test="${publishedBooksCount == 1}">
+			            					<p><c:out value="${publishedBooksCount}" /> Book Published</p>
+			            				</c:when>
+			            				<c:otherwise>
+					            			<p><c:out value="${publishedBooksCount}" /> Books Published</p>
+			            				</c:otherwise>
+			            			</c:choose>
 			            			<span>|</span>
-			            			<div id="Follower_Count">	
-				           				<p class="d-flex gap-1"><span>0</span>Followers</p>
-			            			</div>
-			            			<span>|</span>
-			            			<div id="Following_Count">
-			            				<p class="d-flex gap-1"><span>0</span> Following</p>
-			            			</div>
+			            			<c:choose>
+			            				<c:when test="${favoriteBooksCount == 1}">
+			            					<p><c:out value="${favoriteBooksCount}" /> Favorite</p>
+			            				</c:when>
+			            				<c:otherwise>
+					            			<p><c:out value="${favoriteBooksCount}" /> Favorites</p>
+			            				</c:otherwise>
+			            			</c:choose>
 			            		</div>
 	           				</div>
-		            		<div id="User_AboutMe">
-		            			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eros in cursus turpis massa tincidunt dui. Tristique et egestas quis ipsum suspendisse ultrices. Amet aliquam id diam maecenas ultricies mi eget.</p>
+		            		<div id="User_AboutMe" class="mt-3 text-center text-md-start">
+		            			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+		            		</div>
+		            		<div class="d-flex justify-content-center">
+			            		<button class="btn btn-sm btn-secondary" disabled>Edit Profile - Feature coming soon!</button>
 		            		</div>
 						</div>
-						<div id="My_Books_Div" class="order-lg-1 order-2 mt-lg-0 mt-3 col-lg-7">
+						<div id="MyBooks_and_FavBooks_Div" class="order-lg-1 order-2 mt-lg-0 mt-3 col-lg-7">
 							<h4 class="border-bottom border-3 pb-2 fw-semibold">My Books</h4>
-	            			<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
-	            				<div id="FlexDivLeft_BookDetails">
-		            				<h5>Where the Red Fern Grows</h5>
-		            				<h6>by Wilson Rawls</h6>
-		            				<p class="text-secondary">added May 7, 2022 11:30AM</p>
-	            				</div>
-	            				<div id="Button-Config" class="d-sm-grid d-flex justify-content-between gap-1">
-									<button class="btn btn-dark bt-sm fw-medium w-100 mb-3">Edit</button>
-									<button class="btn btn-danger bt-sm fw-medium w-100 px-4 mb-3">Delete</button>
-								</div>
-	            			</div>
-	            			<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
-	            				<div id="FlexDivLeft_BookDetails">
-		            				<h5>Where the Red Fern Grows</h5>
-		            				<h6>by Wilson Rawls</h6>
-		            				<p class="text-secondary">added May 7, 2022 11:30AM</p>
-	            				</div>
-	            				<div id="Button-Config" class="d-sm-grid d-flex justify-content-between gap-1">
-									<button class="btn btn-dark bt-sm fw-medium w-100 mb-3">Edit</button>
-									<button class="btn btn-danger bt-sm fw-medium w-100 px-4 mb-3">Delete</button>
-								</div>
-	            			</div>
-	            			<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
-	            				<div id="FlexDivLeft_BookDetails">
-		            				<h5>Where the Red Fern Grows</h5>
-		            				<h6>by Wilson Rawls</h6>
-		           					<p class="text-secondary">added by @username123</p>
-	            				</div>
-	           					<div id="Button-Config" class="d-grid d-md-flex justify-content-md-end">
-									<button class="btn btn-outline-dark bt-sm fw-medium px-4 mb-3">Unfavorite</button>
-								</div>
-	           				</div>
+							<c:choose>
+			            		<c:when test="${empty myBooks}">
+			            			<p class="text-center">You haven't registered any books yet. Add one <a href="/home">now</a>!</p>
+			           			</c:when>
+			           			<c:otherwise>
+			           				<c:forEach var="book" items="${myBooks}">			            				
+				           				<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
+		           							<div id="FlexDivLeft_BookDetails">
+				            					<h5><a href="/book/show/${book.id}" class="text-dark text-decoration-none"><c:out value="${book.title}" /></a></h5>
+			           							<h6>by <c:out value="${book.writer.firstName}" /> <c:out value="${book.writer.lastName}" /></h6>
+			           							<p class="text-secondary">Published: <fmt:formatDate value="${book.createdAt}" pattern="MMM d, yyyy • hh:mma" /></p>
+		           							</div>
+		           							<div id="Button-Config" class="d-sm-grid d-flex justify-content-between gap-1">
+												<a href="/book/show/${book.id}/edit" class="btn btn-dark bt-sm fw-medium w-100 px-4 text-decoration-none">Edit</a>
+												<a href="/book/${book.id}/delete" class="btn btn-danger bt-sm fw-medium w-100 px-4 text-decoration-none">Delete</a>
+											</div>
+		           						</div>
+			           				</c:forEach>
+			           			</c:otherwise>
+			           		</c:choose>
+			           		<!--  -->
+			           		<h4 class="border-bottom border-3 pb-2 fw-semibold">Favorite Reads</h4>
+			           		<c:choose>
+								<c:when test="${empty favoriteBooks}">
+									<p class="text-center">You currently have no favorites. Explore a story now!</p>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="book" items="${favoriteBooks}">
+										<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
+				            				<div id="FlexDivLeft_BookDetails">
+					            				<h5><c:out value="${book.title}" /></h5>
+					            				<h6>by @<c:out value="${book.writer.username}" /></h6>
+				    	       					<p class="text-secondary">Published: <fmt:formatDate value="${book.createdAt}" pattern="MMM d, yyyy • hh:mma" /></p>
+				            				</div>
+					       					<div id="Button-Config" class="d-grid d-md-flex justify-content-md-end">
+												<a href="/book/${book.id}/unfavorite" class="btn btn-outline-dark bt-sm fw-medium px-3 w-100 mb-3">Unfavorite</a>
+											</div>
+				           				</div>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</div>
-            			
-	            		<!-- <div id="FlexDiv_Left" class="col-12 col-lg-7">
-	            			<div id="My_Books_Div">
-			            		<h4 class="border-bottom border-3 pb-2 fw-semibold">My Books</h4>
-	            				<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
-	            					<div id="FlexDivLeft_BookDetails">
-		            					<h5>Where the Red Fern Grows</h5>
-		            					<h6>by Wilson Rawls</h6>
-		            					<p class="text-secondary">added May 7, 2022 11:30AM</p>
-	            					</div>
-	            					<div id="Button-Config" class="d-sm-grid d-flex justify-content-between gap-1">
-										<button class="btn btn-dark bt-sm fw-medium w-100 mb-3">Edit</button>
-										<button class="btn btn-danger bt-sm fw-medium w-100 px-4 mb-3">Delete</button>
-									</div>
-	            				</div>
-	            				<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
-	            					<div id="FlexDivLeft_BookDetails">
-		            					<h5>Where the Red Fern Grows</h5>
-		            					<h6>by Wilson Rawls</h6>
-		            					<p class="text-secondary">added May 7, 2022 11:30AM</p>
-	            					</div>
-	            					<div id="Button-Config" class="d-sm-grid d-flex justify-content-between gap-1">
-										<button class="btn btn-dark bt-sm fw-medium w-100 mb-3">Edit</button>
-										<button class="btn btn-danger bt-sm fw-medium w-100 px-4 mb-3">Delete</button>
-									</div>
-	            				</div>
-	            			</div>
-	            		</div> -->
-	            		<!--  -->
-	            		<!-- <div id="FlexDiv_Right" class="d-none d-lg-block col-lg-4">
-	            			<div id="UserProfile_and_Name" class="border-bottom border-3 pb-2 d-flex align-items-center justify-content-start">
-								<span class="me-3">
-									<img src="/images/abstract-user-flat-4.svg" alt="user-icon" style="height: 55px;" class="image-with-border">
-								</span>
-								<div id="Username_ActualName">
-									<h5>@jdoe</h5>
-				            		<h5>Jane Doe</h5>
-								</div>
-	            			</div>
-		            		<div id="User_Stats" class="pt-2 text-secondary d-flex justify-content-center gap-1">
-		            			<p>16 Books</p>
-		            			<span>|</span>
-		            			<div id="Follower_Count">
-			            			<p class="d-flex gap-1">
-			            				<span>17</span>
-			            				Followers
-			            			</p>
-		            			</div>
-		            			<span>|</span>
-		            			<div id="Following_Count">
-			            			<p class="d-flex gap-1">
-			            				<span>3</span>
-			            				Following
-			            			</p>
-		            			</div>
-		            		</div>
-		            		<div id="User_AboutMe">
-		            			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eros in cursus turpis massa tincidunt dui. Tristique et egestas quis ipsum suspendisse ultrices. Amet aliquam id diam maecenas ultricies mi eget.</p>
-		            		</div>
-	            		</div> -->
             		</div>
             		<!--  -->
         		</div>
