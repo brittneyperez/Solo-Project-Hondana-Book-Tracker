@@ -22,6 +22,7 @@ import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -53,30 +54,30 @@ public class User {
 	
 	
 	// * OBJECT-SPECIFIC ATTRIBUTES -------------
-	@NotEmpty(message = "First Name is required")
+	@NotBlank(message = "First Name is required")
 	@Size(min = 2, message = "Must be at least 2 characters")
 	private String firstName;
 	
-	@NotEmpty(message = "Last Name is required")
+	@NotBlank(message = "Last Name is required")
 	@Size(min = 2, message = "Must be at least 2 characters")
 	private String lastName;
 	
-	@NotEmpty(message = "Email is required")
+	@NotBlank(message = "Email is required")
 	@Email(message = "Invalid email format")
 	private String email;
 	
-	@NotEmpty(message = "Username is required")
+	@NotBlank(message = "Username is required")
 	@Size(min = 3, message = "Must be at least 3 characters")
 	@Pattern(regexp = "^[a-zA-Z0-9_.]+$", message ="Username can only contain letters, numbers, periods, and underscores")
 	@Column(unique = true)
 	private String username;
 	
-	@NotEmpty(message = "Password is required")
+	@NotBlank(message = "Password is required")
 	@Size(min = 8, message = "Password must be 8–30 characters")
 	@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#$%^&*]).*$", message = "Password must contain a combination of numbers, letters, or special characters")
 	private String password;
 	@Transient
-	@NotEmpty(message = "Confirm password is required")
+	@NotBlank(message = "Confirm password is required")
 	@Size(min = 8, message = "Password must be 8–30 characters")
 	private String confirmPassword;
 	

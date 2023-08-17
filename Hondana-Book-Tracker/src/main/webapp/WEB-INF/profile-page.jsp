@@ -104,7 +104,7 @@
 									<c:forEach var="book" items="${favoriteBooks}">
 										<div id="Individual_Book_Item" class="border-bottom mb-3 d-sm-flex align-items-center justify-content-between">
 				            				<div id="FlexDivLeft_BookDetails">
-					            				<h5><c:out value="${book.title}" /></h5>
+					            				<h5><a href="/book/show/${book.id}" class="text-dark text-decoration-none"><c:out value="${book.title}" /></a></h5>
 					            				<h6>by @<c:out value="${book.writer.username}" /></h6>
 				    	       					<p class="text-secondary">Published: <fmt:formatDate value="${book.createdAt}" pattern="MMM d, yyyy • hh:mma" /></p>
 				            				</div>

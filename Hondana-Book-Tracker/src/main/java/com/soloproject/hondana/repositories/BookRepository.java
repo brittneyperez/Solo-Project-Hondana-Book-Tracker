@@ -11,7 +11,8 @@ import com.soloproject.hondana.models.User;
 
 @Repository
 public interface BookRepository extends CrudRepository<Book, Long> {
-	List<Book> findAll();
+	List<Book> findAll(); // retrieve all books
+	List<Book> findByWriterNot(User user); // find books published by other users
 	
 	List<Book> findByReadersContaining(User user); // find readers of a book they favroited
 	List<Book> findByReadersNotContaining(User user); // find readers who didn't favorite the books

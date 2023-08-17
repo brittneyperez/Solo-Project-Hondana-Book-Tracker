@@ -30,6 +30,10 @@ public class BookService {
 	public Book findBookById(Long id) {
 		return this.bookRepo.findById(id).orElse(null);
 	}
+	// Find books published by other users:
+	public List<Book> findBooksPublishedByOtherUsers(User currentUser) {
+		return this.bookRepo.findByWriterNot(currentUser);
+	}
 	
 	
 //	* UPDATE

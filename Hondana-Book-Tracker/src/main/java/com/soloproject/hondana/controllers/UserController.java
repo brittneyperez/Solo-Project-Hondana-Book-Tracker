@@ -76,11 +76,11 @@ public class UserController {
 		Long userId = (long) session.getAttribute("userId");
 		User currentUser = this.uService.findUserById(userId);
 		model.addAttribute("currentUser", currentUser);
-//		! Todo: Implement a list of books not writte by the user to favorite/unfavorite
 //		model.addAttribute("books", this.bService.findAllBooks());
-		model.addAttribute("myBooks", currentUser.getMyBooks());
-//		model.addAttribute("allBooks", this.bService.findUnfavoritedBooksForThisUser(currentUser));
+		
 		model.addAttribute("allBooks", this.bService.findAllBooks());
+		model.addAttribute("otherUsersBooks", this.bService.findBooksPublishedByOtherUsers(currentUser));
+		model.addAttribute("myBooks", currentUser.getMyBooks());
 		
 		// add book model attribute
 		return "home.jsp";
